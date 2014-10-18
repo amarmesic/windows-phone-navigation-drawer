@@ -55,8 +55,6 @@ namespace DrawerLayout
         }
         public void InitializeDrawerLayout()
         {
-            #region Inits
-
             if (Children == null) return;
             if (Children.Count < 2) return;
 
@@ -74,8 +72,6 @@ namespace DrawerLayout
 
             _mainFragment.Name = "_mainFragment";
             _listFragment.Name = "_listFragment";
-
-            #endregion
 
             // _mainFragment
             _mainFragment.HorizontalAlignment = HorizontalAlignment.Stretch;

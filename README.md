@@ -14,7 +14,7 @@ How to Use
 
 * In your MainPage.xaml, add a namespace
 ```sh
- xmlns:drawerLayout="clr-namespace:DrawerLayout;assembly=DrawerLayout"
+ xmlns:drawerLayout="using:DrawerLayout"
 ```
 
 * Replace the root Grid layout with the DrawerLayout
@@ -23,10 +23,10 @@ How to Use
 
 ```sh
   <drawerLayout:DrawerLayout x:Name="RootLayout">
-        <Grid x:Name="MainFragment">
+        <Grid>
             <!-- Main content goes here -->
         </Grid>
-        <Grid x:Name="ListFragment">
+        <Grid>
             <!-- Navigation Drwawer goes here -->
         </Grid>
     </drawerLayout:DrawerLayout>
