@@ -47,20 +47,22 @@ Documentation
 
 ### 1. Properties
 
-* IsDrawerOpened - returns true if drawer opened, else returns false
+* IsDrawerOpened - returns true if drawer opened, else returns false.
 
 ### 2. Methods
 
-* OpenDrawer - opens the navigation drawer
+* InitializeDrawerLayout - initializes the drawer layout. Method must be called inside constructor.
 
-* CloseDrawer - closes the navigation drawer
+* OpenDrawer - opens the navigation drawer.
+
+* CloseDrawer - closes the navigation drawer.
 
 ### 3. Events
 Drawer Layout raises two (self explanatory) events:
 
-1. DrawerOpened - raised when you swipe the drawer to the right or call OpenDrawer
+1. DrawerOpened - raised when you swipe the drawer to the right or call OpenDrawer.
 
-2. DrawerClosed - raises when you swipe the drawer to the left or call CloseDrawer
+2. DrawerClosed - raises when you swipe the drawer to the left or call CloseDrawer.
 
 ### Demo & Tutorial
 

@@ -76,6 +76,7 @@ namespace DrawerLayout
             // _mainFragment
             _mainFragment.HorizontalAlignment = HorizontalAlignment.Stretch;
             _mainFragment.VerticalAlignment = VerticalAlignment.Stretch;
+            _mainFragment.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
 
             // Render transform _listFragment
             _listFragment.HorizontalAlignment = HorizontalAlignment.Left;
