@@ -1,7 +1,9 @@
 Navigation Drawer Layout for Windows Phone 8.1
 ==============================================
 
-Control implements Android like navigation drawer layout for Windows Phone 8.1. Created as PCL, compatible with Visual Studio 2013.
+Control implements Android like navigation drawer layout for Windows Phone 8.1.
+
+![Navigation Drawer](http://amarmesic.net/img/navdrawer.gif?raw=true)
 
 How to Use
 ----
