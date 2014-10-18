@@ -42,7 +42,7 @@ Documentation
 ### 2. Methods
 
 * OpenDrawer - opens the navigation drawer
-* 
+
 * CloseDrawer - closes the navigation drawer
 
 ### 3. Events
