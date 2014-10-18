@@ -32,6 +32,16 @@ How to Use
     </drawerLayout:DrawerLayout>
 ```
 
+The final step is to initialize the layout in your MainPage constructor:
+
+```sh
+ public MainPage()
+        {
+            this.InitializeComponent();
+            RootLayout.InitializeDrawerLayout();
+        }
+```
+
 Documentation
 --------------
 
