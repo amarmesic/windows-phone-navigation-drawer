@@ -68,7 +68,7 @@ Drawer Layout raises two (self explanatory) events:
 
 ### Demo & Tutorial
 
-Available at http://blog.amarmesic.net
+
 
 ### NuGet
 
