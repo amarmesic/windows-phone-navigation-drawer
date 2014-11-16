@@ -53,6 +53,7 @@ namespace DrawerLayout
         {
             IsDrawerOpen = false;
         }
+   
         public void InitializeDrawerLayout()
         {
             if (Children == null) return;
@@ -76,12 +77,13 @@ namespace DrawerLayout
             // _mainFragment
             _mainFragment.HorizontalAlignment = HorizontalAlignment.Stretch;
             _mainFragment.VerticalAlignment = VerticalAlignment.Stretch;
-            _mainFragment.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+            if (_mainFragment.Background == null) _mainFragment.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
 
             // Render transform _listFragment
             _listFragment.HorizontalAlignment = HorizontalAlignment.Left;
             _listFragment.VerticalAlignment = VerticalAlignment.Stretch;
             _listFragment.Width = (Window.Current.Bounds.Width/3)*2;
+            if (_listFragment.Background == null) _listFragment.Background = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
 
             var animatedTranslateTransform = new TranslateTransform {X = -_listFragment.Width, Y = 0};
 
