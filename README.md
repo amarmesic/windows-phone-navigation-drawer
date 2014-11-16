@@ -1,9 +1,9 @@
 Navigation Drawer Layout for Windows Phone 8.1
 ==============================================
 
-Control implements Android like navigation drawer layout for Windows Phone 8.1.
+Control implements 'One Drive like' Navigation Drawer Layout for Windows Phone 8.1.
 
-![Navigation Drawer](http://amarmesic.net/img/navdrawer.gif?raw=true)
+![Navigation Drawer](http://amarmesic.net/img/navdrawer.gif)
 
 How to Use
 ----
@@ -24,7 +24,7 @@ How to Use
 * Create two child Grid controls inside the DrawerLayout. First control will contain the main content and the second will contain the navigation drawer. Your MainPage.xaml code should look like this:
 
 ```sh
-  <drawerLayout:DrawerLayout x:Name="RootLayout">
+  <drawerLayout:DrawerLayout x:Name="DrawerLayout">
         <Grid>
             <!-- Main content goes here -->
         </Grid>
@@ -40,7 +40,7 @@ The final step is to initialize the layout in your MainPage constructor:
  public MainPage()
         {
             this.InitializeComponent();
-            RootLayout.InitializeDrawerLayout();
+            DrawerLayout.InitializeDrawerLayout();
         }
 ```
 
@@ -68,33 +68,15 @@ Drawer Layout raises two (self explanatory) events:
 
 ### Demo & Tutorial
 
-
+Demo app on Windows Phone Store: [http://www.windowsphone.com/s?appid=d0264913-cfa2-4273-91c5-8372a5347084](http://www.windowsphone.com/s?appid=d0264913-cfa2-4273-91c5-8372a5347084 "Windows Phone Store Demo App")
 
 ### NuGet
 
 Navigation Drawer Layout is also available as NuGet Package
-https://www.nuget.org/packages/DrawerLayout/
+[https://www.nuget.org/packages/DrawerLayout/](https://www.nuget.org/packages/DrawerLayout/ "NuGet Package")
 
 Licence
 ----
 
-The MIT License (MIT)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+[http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT "MIT Licence")
 
