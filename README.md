@@ -68,7 +68,10 @@ Drawer Layout raises two (self explanatory) events:
 
 ### Demo & Tutorial
 
-Demo app on Windows Phone Store: [http://www.windowsphone.com/s?appid=d0264913-cfa2-4273-91c5-8372a5347084](http://www.windowsphone.com/s?appid=d0264913-cfa2-4273-91c5-8372a5347084 "Windows Phone Store Demo App")
+Demo app on Windows Phone Store:
+[http://www.windowsphone.com/s?appid=d0264913-cfa2-4273-91c5-8372a5347084](http://www.windowsphone.com/s?appid=d0264913-cfa2-4273-91c5-8372a5347084 "Windows Phone Store Demo App")
+
+Tutorial available on [http://www.c-sharpcorner.com/UploadFile/cb386b/implementing-navigation-drawer-for-windows-phone-8-1/](http://www.c-sharpcorner.com/UploadFile/cb386b/implementing-navigation-drawer-for-windows-phone-8-1/ "C Sharp Corner")
 
 ### NuGet
 
