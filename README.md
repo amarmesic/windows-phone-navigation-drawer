@@ -1,7 +1,7 @@
 Navigation Drawer Layout for Windows Phone 8.1
 ==============================================
 
-Control implements 'One Drive like' Navigation Drawer Layout for Windows Phone 8.1.
+'One Drive like' Navigation Drawer Layout for Windows Phone 8.1.
 
 ![Navigation Drawer](http://amarmesic.net/img/navdrawer.gif)
 
