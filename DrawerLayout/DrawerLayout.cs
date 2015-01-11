@@ -33,9 +33,16 @@ namespace DrawerLayout
 
         #endregion
 
-        #region Properties
+        #region Dependency Properties
 
-        public bool IsDrawerOpen { get; set; }
+        public bool IsDrawerOpen
+        {
+             get { return (bool)GetValue(IsDrawerOpenProperty); }
+             set { SetValue(IsDrawerOpenProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsDrawerOpenProperty = DependencyProperty.Register("IsDrawerOpen", typeof(bool), typeof(DrawerLayout), new PropertyMetadata(false));
+
         private PropertyPath TranslatePath
         {
             get { return _translatePath; }
