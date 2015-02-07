@@ -19,7 +19,7 @@ namespace DrawerLayout
 
         private readonly TranslateTransform _listFragmentTransform = new TranslateTransform();
         private readonly TranslateTransform _deltaTransform = new TranslateTransform();
-        private const int MaxAlpha = 190;
+        private const int MaxAlpha = 100;
 
         public delegate void DrawerEventHandler(object sender);
         public event DrawerEventHandler DrawerOpened;
@@ -174,6 +174,7 @@ namespace DrawerLayout
             if (_fadeInStoryboard == null || _mainFragment == null || _listFragment == null) return;
             _shadowFragment.Visibility = Visibility.Visible;
             _shadowFragment.IsHitTestVisible = true;
+            _shadowFragment.Background = new SolidColorBrush(Color.FromArgb(MaxAlpha, 0, 0, 0));
             _fadeInStoryboard.Begin();
             IsDrawerOpen = true;
 
@@ -222,11 +223,14 @@ namespace DrawerLayout
             _shadowFragment.IsHitTestVisible = false;
             _shadowFragment.Visibility = Visibility.Collapsed;
 
+            this.IsDrawerOpen = false;
+
             // raise close event
             if (DrawerClosed != null) DrawerClosed(this);
         }
         private void fadeOutStoryboard_Completed(object sender, object e)
         {
+            _shadowFragment.Background = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
             _shadowFragment.Visibility = Visibility.Collapsed;
             if (DrawerClosed != null) DrawerClosed(this);
         }
@@ -294,7 +298,7 @@ namespace DrawerLayout
         private void listFragment_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             if (Math.Abs(e.Cumulative.Translation.X) < 0) return;
-            if (e.Cumulative.Translation.X <= -_listFragment.Width)
+            if (e.Cumulative.Translation.X <= -_listFragment.Width || e.Cumulative.Translation.X > 0)
             {
                 listFragment_ManipulationCompleted(this, null);
                 return;
@@ -307,12 +311,12 @@ namespace DrawerLayout
         private void listFragment_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
             // Get left of _listFragment
-            var transform = (TranslateTransform) _listFragment.RenderTransform;
+            var transform = (TranslateTransform)_listFragment.RenderTransform;
             if (transform == null) return;
             var left = transform.X;
 
             // Set snap divider to 1/3 of _mainFragment width
-            var snapLimit = _mainFragment.ActualWidth/3;
+            var snapLimit = _mainFragment.ActualWidth / 3;
 
             // Get init position of _listFragment
             const int initialPosition = 0;
@@ -331,7 +335,7 @@ namespace DrawerLayout
                 // raise DrawerClosed event
                 if (DrawerClosed != null) DrawerClosed(this);
             }
-                // else open drawer
+            // else open drawer
             else if (Math.Abs(initialPosition - left) < snapLimit)
             {
                 // move drawer to zero
@@ -376,12 +380,12 @@ namespace DrawerLayout
         private void mainFragment_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
             // Get left of _listFragment
-            var transform = (TranslateTransform) _listFragment.RenderTransform;
+            var transform = (TranslateTransform)_listFragment.RenderTransform;
             if (transform == null) return;
             var left = transform.X;
 
             // Set snap divider to 1/3 of _mainFragment width
-            var snapLimit = _mainFragment.ActualWidth/3;
+            var snapLimit = _mainFragment.ActualWidth / 3;
 
             // Get init position of _listFragment
             var initialPosition = -_listFragment.Width;
@@ -400,7 +404,7 @@ namespace DrawerLayout
                 // raise DrawerClosed event
                 if (DrawerClosed != null) DrawerClosed(this);
             }
-                // else open drawer
+            // else open drawer
             else if (Math.Abs(initialPosition - left) > snapLimit)
             {
                 // move drawer to zero
