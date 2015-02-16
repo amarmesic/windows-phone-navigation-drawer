@@ -78,8 +78,13 @@ Tutorial available on [http://www.c-sharpcorner.com/UploadFile/cb386b/implementi
 Navigation Drawer Layout is also available as NuGet Package
 [https://www.nuget.org/packages/DrawerLayout/](https://www.nuget.org/packages/DrawerLayout/ "NuGet Package")
 
+### Windows Phone 8 Support
+
+For Silverlight version, check out the port on https://github.com/jgannaway/windows-phone-navigation-drawer
+
+Credits: Jeremy Gannaway (https://github.com/jgannaway)
+
 Licence
 ----
 
 [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT "MIT Licence")
-
