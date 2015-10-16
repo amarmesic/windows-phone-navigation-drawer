@@ -4,6 +4,7 @@ using System.Linq;
 using Windows.Foundation;
 using Windows.Graphics.Display;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -34,8 +35,7 @@ namespace DrawerLayout
         private Grid _mainFragment;
         private Grid _shadowFragment;
 
-        private const int MinusMargin2 = -200;
-        private const int MinusMargin = 0;
+        private const int MinusMargin = -200;
 
         #endregion
 
@@ -113,9 +113,12 @@ namespace DrawerLayout
             _listFragment.HorizontalAlignment = HorizontalAlignment.Left;
             _listFragment.VerticalAlignment = VerticalAlignment.Stretch;
             this.ResizeDrawer();
+
+            Window.Current.SizeChanged += CurrentOnSizeChanged;
+
             if (_listFragment.Background == null) _listFragment.Background = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
 
-            var animatedTranslateTransform = new TranslateTransform { X = -_listFragment.Width + MinusMargin2, Y = 0};
+            var animatedTranslateTransform = new TranslateTransform { X = -_listFragment.Width + MinusMargin, Y = 0};
 
             _listFragment.RenderTransform = animatedTranslateTransform;
             _listFragment.RenderTransformOrigin = new Point(0.5, 0.5);
@@ -167,7 +170,7 @@ namespace DrawerLayout
             var doubleAnimation2 = new DoubleAnimation
             {
                 Duration = new Duration(new TimeSpan(0, 0, 0, 0, 300)),
-                To = -_listFragment.Width + MinusMargin2,
+                To = -_listFragment.Width + MinusMargin,
                 EasingFunction = new ExponentialEase()
             };
 
@@ -193,6 +196,15 @@ namespace DrawerLayout
             _listFragment.ManipulationStarted += listFragment_ManipulationStarted;
 
         }
+
+        private void CurrentOnSizeChanged(object sender, WindowSizeChangedEventArgs windowSizeChangedEventArgs)
+        {
+            this.ResizeDrawer();
+            var o = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().Orientation;
+            if (o == ApplicationViewOrientation.Landscape)
+                this.CloseDrawer();
+        }
+
         public void OpenDrawer()
         {
             if (_fadeInStoryboard == null || _mainFragment == null || _listFragment == null) return;
@@ -224,7 +236,7 @@ namespace DrawerLayout
             var doubleAnimation = new DoubleAnimation
             {
                 Duration = new Duration(new TimeSpan(0, 0, 0, 0, 300)),
-                To = -_listFragment.Width + MinusMargin2,
+                To = -_listFragment.Width + MinusMargin,
                 EasingFunction = new ExponentialEase()
             };
 
@@ -249,7 +261,7 @@ namespace DrawerLayout
         {
             _shadowFragment.IsHitTestVisible = false;
             _shadowFragment.Visibility = Visibility.Collapsed;
-            _listFragment.Margin = new Thickness(MinusMargin, 0, 0, 0);
+            _listFragment.Margin = new Thickness(0, 0, 0, 0);
             this.IsDrawerOpen = false;
 
             // raise close event
