@@ -73,7 +73,7 @@ namespace DrawerLayout
             if (o == ApplicationViewOrientation.Landscape)
             {
                 _listFragment.Width = Window.Current.Bounds.Width / 2;
-                _listFragment.Margin = new Thickness(-200, 0, 0, 0);
+                _listFragment.Margin = new Thickness(MinusMargin, 0, 0, 0);
             }
                 
             else
@@ -336,23 +336,46 @@ namespace DrawerLayout
             this.ResizeDrawer();
 
             var listWidth = _listFragment.Width;
-            if (!(e.Position.X >= listWidth - 100) || !(e.Position.X < listWidth)) return;
+            if (!(e.Position.X >= listWidth - 100) || !(e.Position.X < listWidth))
+                return;
             _listFragment.ManipulationDelta += listFragment_ManipulationDelta;
             _listFragment.ManipulationCompleted += listFragment_ManipulationCompleted;
         }
         private void listFragment_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (Math.Abs(e.Cumulative.Translation.X) < 0) return;
-            if (e.Cumulative.Translation.X <= -_listFragment.Width || e.Cumulative.Translation.X > 0)
+            if (Math.Abs(e.Cumulative.Translation.X) < 0)
+                return;
+            if (Math.Abs(e.Cumulative.Translation.X) <= -_listFragment.Width || IsSwipingBeyondListFragment(e))
             {
                 listFragment_ManipulationCompleted(this, null);
                 return;
             }
+            if(this.FlowDirection == FlowDirection.LeftToRight)
+                _listFragmentTransform.X = e.Cumulative.Translation.X;
+            else
+                _listFragmentTransform.X = - e.Cumulative.Translation.X;
 
-            _listFragmentTransform.X = e.Cumulative.Translation.X;
             _listFragment.RenderTransform = _listFragmentTransform;
-            MoveShadowFragment(e.Cumulative.Translation.X + _listFragment.Width);
+            if (this.FlowDirection == FlowDirection.LeftToRight)
+                MoveShadowFragment(e.Cumulative.Translation.X + _listFragment.Width);
+            else
+                MoveShadowFragment( - e.Cumulative.Translation.X + _listFragment.Width);
+
         }
+
+        private bool IsSwipingBeyondListFragment(ManipulationDeltaRoutedEventArgs e)
+        {
+            if (this.FlowDirection == FlowDirection.LeftToRight)
+            {
+                if (e.Cumulative.Translation.X > 0)
+                    return true;
+                return false;
+            }
+            if (e.Cumulative.Translation.X < 0)
+                return true;
+            return false;
+        }
+
         private void listFragment_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
             // Get left of _listFragment
@@ -361,13 +384,14 @@ namespace DrawerLayout
             var left = transform.X;
 
             // Set snap divider to 1/3 of _mainFragment width
-            var snapLimit = _mainFragment.ActualWidth / 3;
+
+            double snapLimit = _mainFragment.ActualWidth / 3;
 
             // Get init position of _listFragment
             const int initialPosition = 0;
 
             // If current left coordinate is smaller than snap limit, close drawer
-            if (Math.Abs(initialPosition - left) > snapLimit)
+            if(Math.Abs(initialPosition - left) > snapLimit)
             {
                 MoveListFragment(-_listFragment.Width, Color.FromArgb(0, 0, 0, 0));
                 _shadowFragment.Visibility = Visibility.Collapsed;
@@ -381,7 +405,7 @@ namespace DrawerLayout
                 if (DrawerClosed != null) DrawerClosed(this);
             }
             // else open drawer
-            else if (Math.Abs(initialPosition - left) < snapLimit)
+            else if (IsRightGreaterThanLeftCultureSpecific(Math.Abs(initialPosition - left) , snapLimit))
             {
                 // move drawer to zero
                 MoveListFragment(0, Color.FromArgb(190, 0, 0, 0));
@@ -394,6 +418,14 @@ namespace DrawerLayout
                 // raise Drawer_Open event
                 if (DrawerOpened != null) DrawerOpened(this);
             }
+        }
+
+        private bool IsRightGreaterThanLeftCultureSpecific(double left, double right)
+        {
+            if (this.FlowDirection == FlowDirection.LeftToRight)
+                return left < right;
+            else
+                return right > left;
         }
 
         #endregion
@@ -417,13 +449,15 @@ namespace DrawerLayout
             if (o == ApplicationViewOrientation.Landscape) return;
 
             if (Math.Abs(e.Cumulative.Translation.X) < 0) return;
-            if (e.Cumulative.Translation.X >= _listFragment.Width)
+            if (Math.Abs(e.Cumulative.Translation.X) >= _listFragment.Width)
             {
                 mainFragment_ManipulationCompleted(this, null);
                 return;
             }
-
-            _deltaTransform.X = -_listFragment.Width + e.Cumulative.Translation.X;
+            if(this.FlowDirection == FlowDirection.LeftToRight)
+                _deltaTransform.X = -_listFragment.Width + e.Cumulative.Translation.X;
+            else
+                _deltaTransform.X = -_listFragment.Width - e.Cumulative.Translation.X;
             _listFragment.RenderTransform = _deltaTransform;
             MoveShadowFragment(e.Cumulative.Translation.X);
         }
