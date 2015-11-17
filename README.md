@@ -8,7 +8,7 @@ Navigation Drawer Layout for Windows Phone 8.1
 Features
 ----
 * swipe support
-* landscape and RTL support (@konradbartecki)
+* landscape and RTL support (Credits:Konrad Bartecki https://github.com/konradbartecki)
 
 How to Use
 ----
