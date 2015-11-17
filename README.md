@@ -5,6 +5,11 @@ Navigation Drawer Layout for Windows Phone 8.1
 
 ![Navigation Drawer](http://amarmesic.net/img/navdrawer.gif)
 
+Features
+----
+* swipe support
+* landscape and RTL support (@konradbartecki)
+
 How to Use
 ----
 
