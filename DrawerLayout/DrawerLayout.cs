@@ -343,7 +343,7 @@ namespace DrawerLayout
         }
         private void listFragment_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (Math.Abs(e.Cumulative.Translation.X) < 0)
+            if (e.CumulativeManipulation.Translation.X > 0)
                 return;
             if (Math.Abs(e.Cumulative.Translation.X) <= -_listFragment.Width || IsSwipingBeyondListFragment(e))
             {
